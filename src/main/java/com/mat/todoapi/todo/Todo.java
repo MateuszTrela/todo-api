@@ -1,23 +1,31 @@
 package com.mat.todoapi.todo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
 @Entity
+@Getter @Setter @NoArgsConstructor @ToString
 public class Todo {
     @Id
     @GeneratedValue
     private Integer id;
+    @NotNull(message = "username can't be null")
     private String username;
+    @Size(min = 1, message = "description must contains at lease 1 character")
     private String description;
     private boolean isDone;
+    @NotNull(message = "targetDate can't be null")
     private LocalDate targetDate;
-
-    public Todo() {
-    }
 
     public Todo(Integer id, String username, String description, boolean isDone, LocalDate targetDate) {
         this.id = id;
@@ -25,56 +33,5 @@ public class Todo {
         this.description = description;
         this.isDone = isDone;
         this.targetDate = targetDate;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public boolean isDone() {
-        return isDone;
-    }
-
-    public void setDone(boolean done) {
-        isDone = done;
-    }
-
-    public LocalDate getTargetDate() {
-        return targetDate;
-    }
-
-    public void setTargetDate(LocalDate targetDate) {
-        this.targetDate = targetDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Todo{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", description='" + description + '\'' +
-                ", isDone=" + isDone +
-                ", targetDate=" + targetDate +
-                '}';
     }
 }
